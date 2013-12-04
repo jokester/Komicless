@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require "optparse"
+require 'komicless'
+
+# Options :
+#   --root (mandatory)
+#   --port (optional)
+#   --extension ?
+
+puts "running Komicless #{Komicless::VERSION}"

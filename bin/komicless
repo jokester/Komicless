@@ -10,3 +10,5 @@ require 'komicless'
 #   --extension ?
 
 puts "running Komicless #{Komicless::VERSION}"
+puts "at #{__FILE__}"
+puts "template = #{Komicless::INDEX_HAML}"

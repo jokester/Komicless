@@ -1,5 +1,6 @@
 require "komicless/version"
+require "komicless/server"
 
 module Komicless
-  # Your code goes here...
+
 end

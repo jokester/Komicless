@@ -1,5 +1,8 @@
 require "bundler/gem_tasks"
 
-task :exec do
-  system "bundle exec bin/komicless"
+desc "run unpacked version"
+task :demo do
+  sh "bundle exec bin/komicless"
 end
+
+task :default => :demo

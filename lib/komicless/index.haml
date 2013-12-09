@@ -5,8 +5,9 @@
     %meta{ "http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8"}
   %body
     %ul
-      %li
-        %a{ href: "a_dir",  booktitle: "title_of_a_dir", bookdate:  1383899546 }
-          a_dir
-        %a{ href: "a_file", booktitle: "title_of_a_file", bookdate: 1383894000, booksize: 100, bookfile: "true" }
-          a_file
+      - files.each do | (url, basename, size, type, mtime) |
+        %li
+          - if type == "directory"
+            %a{ href: "a_dir",  booktitle: "title_of_a_dir", bookdate:  1383899546 }= basename
+          - else
+            %a{ href: "a_file", booktitle: "title_of_a_file", bookdate: 1383894000, booksize: 100, bookfile: "true" }= basename

@@ -8,6 +8,6 @@
       - files.each do | (url, basename, size, type, mtime) |
         %li
           - if type == "directory"
-            %a{ href: "a_dir",  booktitle: "title_of_a_dir", bookdate:  1383899546 }= basename
+            %a{ href: url, booktitle: basename, bookdate: mtime }= basename
           - else
-            %a{ href: "a_file", booktitle: "title_of_a_file", bookdate: 1383894000, booksize: 100, bookfile: "true" }= basename
+            %a{ href: url, booktitle: basename, bookdate: mtime, booksize: size, bookfile: "true" }= basename

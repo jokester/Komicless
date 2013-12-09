@@ -1,14 +1,27 @@
 #!/usr/bin/env ruby
 # vim: ft=ruby
 
-require "optparse"
+require 'optparse'
 require 'komicless'
+require 'rack'
 
 # Options :
 #   --root (mandatory)
 #   --port (optional)
 #   --extension ?
 
-puts "running Komicless #{Komicless::VERSION}"
-puts "at #{__FILE__}"
-puts "template = #{Komicless::INDEX_HAML}"
+handler_options = {}
+root = nil
+OptionParser.new do |parser|
+  parser.on "-p", "--port PORT" do |port|
+    handler_options[ :Port ] = port.to_i
+  end
+  parser.on "-r", "--root ROOT_DIR" do |root_dir|
+    root = root_dir
+  end
+end.parse!
+
+app = Komicless::Server.new( root || "." )
+handler = Rack::Handler.pick %w/ thin webrick /
+
+handler.run app,({ :Port => 10080, }.merge handler_options)

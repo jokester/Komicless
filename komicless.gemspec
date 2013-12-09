@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Komicless::VERSION
   spec.authors       = ["Wang Guan"]
   spec.email         = ["momocraft@gmail.com"]
-  spec.description   = %q{A ComicGlass server written in ruby}
-  spec.summary       = %q{For PHP (preclude hazy PHP)}
-  spec.homepage      = ""
+  spec.description   = %q{Yet another ComicGlass server, written in ruby}
+  spec.summary       = %q{For non-PHPers}
+  spec.homepage      = "https://github.com/Jokester/Komicless"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  spec.add_runtime_dependency     "sinatra"
   spec.add_runtime_dependency     "haml"
+  spec.add_runtime_dependency     "rack"
 end

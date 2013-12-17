@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Komicless MediaServer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <ul>
+      <% @files.each do |(url, basename, size, type, mtime)| %>
+        <li>
+          <% if type=="directory" %>
+            <a href="<%= url %>" >
+              <%= basename %>
+            </a>
+          <% else %>
+            <a href="<%= url %>" booktitle="<%= basename %>" booksize="<%= size %>" >
+              <%= basename %>
+            </a>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>

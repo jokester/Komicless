@@ -1,10 +1,10 @@
 require 'rack'
-require 'haml'
+require 'erb'
 
 module Komicless
 
-  INDEX_HAML = open( File.expand_path "index.haml", File.dirname(__FILE__) ).read.freeze
-  INDEX = ::Haml::Engine.new INDEX_HAML, { :attr_wrapper => '"' } # or there will be ' in filenames
+  INDEX_ERB = open( File.expand_path "index.html.erb", File.dirname(__FILE__) ).read.freeze
+  INDEX = ::ERB.new INDEX_ERB
 
   class Server < ::Rack::Directory
 
@@ -21,9 +21,11 @@ module Komicless
       int
     end
 
-    # render with our HAML template
+    # render with our template
     def each
-      page = INDEX.render(scope=Object.new, locals={ :files => @files } )
+      page = INDEX.result binding
+      # strip space. This regex from http://stackoverflow.com/a/8828408/327815
+      page.gsub!(%r%(?<=[\^])\t{2,}|(?<=[>])\s{2,}(?=[<])|(?<=[>])\s{2,11}(?=[<])|(?=[\n])\s{2,}%,"")
       page.each_line{|l| yield l }
     end
 

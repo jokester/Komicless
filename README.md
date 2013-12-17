@@ -7,7 +7,7 @@ This work should work with recent Ruby, without requiring root privilege and PHP
 
 # Limitations
 
-- Unlike offical servers, Komicless only hosts one directory (not really a problem when we can symlink dirs).
+- Unlike offical servers, Komicless only hosts one directory (not really a problem when it handles symlink of dirs).
 - uPnP is not supported yet.
 
 ## Installation

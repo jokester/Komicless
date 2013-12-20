@@ -3,11 +3,11 @@
 Komicless is an (alternative) server for [ComicGlass](http://comicglass.net/).
 They already provides a Win server, a Mac server, and a PHP version.
 
-This work should work with recent Ruby, without requiring root privilege and PHP.
+This work should work with recent Ruby, without requiring root privilege and a standalone web server.
 
 # Limitations
 
-- Unlike offical servers, Komicless only hosts one directory (not really a problem when it handles symlink of dirs).
+- Unlike offical servers, Komicless only hosts one directory (not really a problem as it handles symlink of dirs).
 - uPnP is not supported yet.
 
 ## Installation

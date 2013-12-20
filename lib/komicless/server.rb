@@ -1,12 +1,26 @@
 require 'rack'
 require 'erb'
+require 'socket'
 
 module Komicless
 
   INDEX_ERB = open( File.expand_path "index.html.erb", File.dirname(__FILE__) ).read.freeze
   INDEX = ::ERB.new INDEX_ERB
 
+  def self.each_nic
+    # enumerate IPaddr of NICs
+    count = 0
+    Socket::getaddrinfo(Socket.gethostname,"http", nil, :STREAM).each do |family, port, hostname, ip, *_|
+      count+=1
+      yield count, ip[/^[^%]*/]
+    end
+  end
+
   class Server < ::Rack::Directory
+
+    def self.create app_options
+      self.new( app_options[:root] )
+    end
 
     # remove first entry
     def list_directory

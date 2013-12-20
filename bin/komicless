@@ -10,18 +10,24 @@ require 'rack'
 #   --port (optional)
 #   --extension ?
 
-handler_options = {}
-root = nil
+handler_options = { :Port => 10080 }
+app_options     = { :root => "." }
+
 OptionParser.new do |parser|
   parser.on "-p", "--port PORT" do |port|
     handler_options[ :Port ] = port.to_i
   end
   parser.on "-r", "--root ROOT_DIR" do |root_dir|
-    root = root_dir
+    app_options[ :root ]     = root_dir
   end
 end.parse!
 
-app = Komicless::Server.new( root || "." )
-handler = Rack::Handler.pick %w/ thin webrick /
+puts "Server port:\t#{handler_options[:Port]}"
+Komicless.each_nic do |count,ipaddr|
+  puts "Server IP (#{count}):\t#{ipaddr}"
+end
+puts "Root directory:\t#{File.absolute_path app_options[:root] }"
 
-handler.run app,({ :Port => 10080, }.merge handler_options)
+app     = Komicless::Server.create app_options
+handler = Rack::Handler.pick %w/ thin webrick /
+handler.run app, handler_options
